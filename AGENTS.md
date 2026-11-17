@@ -1,1 +1,13 @@
-Para realizar la limpieza del dataset, se propone comenzar con una revisión general de los registros para identificar posibles valores nulos, duplicados o inconsistencias en la información. Posteriormente, se deben unificar los formatos de las columnas, verificar que los años estén correctamente registrados como valores numéricos enteros y que las variaciones de temperatura estén expresadas en grados Celsius mediante valores numéricos decimales. También es importante revisar la consistencia de los nombres de las regiones y del indicador, así como eliminar columnas innecesarias o que no aporten directamente al análisis, conservando aquellas que permitan identificar la procedencia de los datos. Finalmente, se recomienda comprobar que cada región tenga sus 65 registros correspondientes al período 1961–2025, garantizando que la información esté organizada y sea adecuada para su posterior análisis y visualización.
+# Reglas de análisis
+
+- Responde y comenta el código en español.
+- Nunca modifiques ni borres archivos de `datos/crudo/`.
+- Nunca inventes, completes ni estimes datos. Si falta algo, dilo.
+- Todo cálculo se hace con un script en `analisis/`, numerado (`01_`, `02_`...), que se pueda volver a ejecutar.
+- Los gráficos se hacen con Altair y se guardan en `docs/graficos/` como HTML.
+- Cada gráfico lleva título, ejes con nombre legible, el tamaño de muestra (n) y la fuente.
+- Antes de ejecutar un cambio grande, explícame el plan y espera mi aprobación.
+- Al terminar cada tarea, dime qué archivos creaste o cambiaste.
+- Trabaja solo dentro del alcance del proyecto analítico. Si te pido algo fuera del alcance, avísame antes de hacerlo.
+
+# Alcance del proyecto analítico
