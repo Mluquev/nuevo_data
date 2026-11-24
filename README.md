@@ -1,43 +1,37 @@
-Variación de la temperatura media en América Latina y el Caribe (1961-2025)
-¿Cuál es el análisis de datos?
-Este proyecto analiza la evolución de la variación de la temperatura media en América Latina y el Caribe entre 1961 y 2025.
+# Variación de la temperatura media en América Latina y el Caribe (1961–2025)
 
-El objetivo es identificar cómo han cambiado las anomalías de temperatura a lo largo del tiempo en tres regiones:
+Análisis descriptivo de 195 observaciones anuales para El Caribe, América Central y América del Sur, a partir de datos de FAOSTAT basados en la metodología NASA GISS.
 
-El Caribe
-América Central
-América del Sur
-La pregunta principal del proyecto es:
+La página de presentación con los gráficos incrustados está disponible en [`index.html`](index.html). Para probarla localmente, inicia un servidor HTTP en la raíz del proyecto y abre `http://localhost:8000/`.
 
-¿Cómo ha evolucionado la variación de la temperatura media en las regiones de América Latina y el Caribe durante las últimas décadas y cuáles presentan los mayores aumentos?
+## Metodología
 
-El análisis forma parte de un ejercicio de exploración de datos ambientales utilizando Python, Altair y GitHub Codespaces.
+1. **Carga:** se cargó la hoja `datos` de [`datos/crudo/data_1787673487.xlsx`](datos/crudo/data_1787673487.xlsx).
+2. **Exploración de variables:** se revisaron las variables de región, año y variación de temperatura, además de los tipos de datos y la unidad.
+3. **Inventario:** se documentaron dimensiones, cobertura y valores nulos. El conjunto contiene 195 registros: 65 años por cada una de las tres regiones.
+4. **Análisis:** se utilizaron Python y resúmenes descriptivos para comparar la evolución anual y los promedios regionales.
+5. **Visualización:** se generaron gráficos con Altair y se guardaron como páginas HTML autocontenidas en [`docs/graficos/`](docs/graficos/).
 
-Descripción de los datos
-Cada fila representa una observación anual de la variación de la temperatura media para una región determinada.
+## Evolución temporal
 
-El conjunto de datos contiene:
+Las series fluctúan de un año a otro y, en general, presentan valores mayores en las décadas recientes que al inicio del registro. En las tres regiones, el valor observado en 2024 es el máximo de la serie; en 2025 disminuye respecto de 2024, aunque permanece positivo.
 
-195 registros.
-Cobertura temporal: 1961-2025.
-Cobertura geográfica:
-El Caribe
-América Central
-América del Sur
-Variables:
+Gráfico interactivo: [`docs/graficos/cambio_tiempo.html`](docs/graficos/cambio_tiempo.html).
 
-Variable	Descripción
-indicator	Nombre del indicador ambiental
-País__ESTANDAR	Región analizada
-Años__ESTANDAR	Año de observación
-value	Variación de la temperatura media respecto al periodo de referencia
-unit	Unidad de medida (grados Celsius)
-notes_ids	Identificador de nota metodológica
-source_id	Identificador de la fuente
-Fuente principal:
+## Ranking regional
 
-FAOSTAT - Organización de las Naciones Unidas para la Agricultura y la Alimentación (FAO).
+El Caribe presenta la mayor variación promedio de temperatura (**0,539 °C**), seguido de América del Sur (**0,532 °C**) y América Central (**0,470 °C**). Cada promedio corresponde a 65 observaciones anuales.
 
-Metodología original:
+Gráfico interactivo: [`docs/graficos/ranking.html`](docs/graficos/ranking.html).
 
-NASA Goddard Institute for Space Studies (GISS).
+## Limitaciones
+
+- El análisis es descriptivo.
+- No permite establecer causalidad.
+- Los datos están agregados a nivel regional.
+
+## Créditos
+
+CEPALSTAT · FAOSTAT · FAO · NASA GISS · GitHub Codespaces · GitHub Copilot
+
+> El código utilizado en este proyecto fue desarrollado con apoyo de un agente de inteligencia artificial.

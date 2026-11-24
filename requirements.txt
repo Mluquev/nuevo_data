@@ -1,2 +1,4 @@
 pandas
 altair
+openpyxl
+vl-convert-python>=1.9.0

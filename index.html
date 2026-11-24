@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Análisis descriptivo de la variación de la temperatura media en tres regiones de América Latina y el Caribe, 1961-2025.">
+  <title>Variación de la temperatura media | América Latina y el Caribe</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: system-ui, sans-serif;
+      color: #172b3a;
+      background: #f3f6f8;
+      line-height: 1.6;
+    }
+
+    * { box-sizing: border-box; }
+
+    body { margin: 0; }
+
+    header {
+      padding: 2rem max(1rem, calc((100% - 1100px) / 2));
+      color: #fff;
+      background: #174a68;
+    }
+
+    header p { max-width: 760px; margin-bottom: 0; color: #e3eef4; }
+
+    h1, h2, h3 { line-height: 1.25; }
+    h1 { max-width: 850px; margin: 0; font-size: clamp(2rem, 5vw, 3.25rem); }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.25rem 1.25rem;
+      padding: 0.75rem max(1rem, calc((100% - 1100px) / 2));
+      background: #fff;
+      border-bottom: 1px solid #d5e0e6;
+    }
+
+    a { color: #145c82; }
+    nav a { font-weight: 650; text-decoration: none; }
+    nav a:hover, nav a:focus-visible { text-decoration: underline; }
+
+    main { width: min(100% - 2rem, 1100px); margin: 0 auto; }
+    section { padding: 2rem 0; scroll-margin-top: 4.5rem; }
+    section + section { border-top: 1px solid #d5e0e6; }
+
+    .resumen {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+      gap: 1rem;
+    }
+
+    .tarjeta {
+      padding: 1rem;
+      background: #fff;
+      border: 1px solid #d5e0e6;
+      border-radius: 0.65rem;
+    }
+
+    .grafico {
+      display: block;
+      width: 100%;
+      border: 0;
+      border-radius: 0.5rem;
+      background: #fff;
+    }
+
+    .grafico-tiempo { height: 680px; }
+    .grafico-ranking { height: 460px; }
+    .nota { color: #465e6e; font-size: 0.95rem; }
+
+    footer {
+      padding: 1.5rem max(1rem, calc((100% - 1100px) / 2));
+      background: #e7eef2;
+    }
+
+    @media (max-width: 540px) {
+      header { padding-top: 1.5rem; padding-bottom: 1.5rem; }
+      nav { gap: 0.25rem 0.85rem; }
+      .grafico-tiempo { height: 620px; }
+      .grafico-ranking { height: 420px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Variación de la temperatura media en América Latina y el Caribe</h1>
+    <p>Un análisis descriptivo de 195 observaciones anuales para El Caribe, América Central y América del Sur, entre 1961 y 2025.</p>
+  </header>
+
+  <nav aria-label="Navegación principal">
+    <a href="#metodologia">Metodología</a>
+    <a href="#evolucion">Evolución temporal</a>
+    <a href="#ranking">Ranking regional</a>
+    <a href="#limitaciones">Limitaciones</a>
+    <a href="#creditos">Créditos</a>
+  </nav>
+
+  <main>
+    <section id="metodologia">
+      <h2>Metodología</h2>
+      <div class="resumen">
+        <article class="tarjeta">
+          <h3>Carga de datos</h3>
+          <p>Se cargó la hoja <code>datos</code> del archivo <code>data_1787673487.xlsx</code>, con información de FAOSTAT basada en la metodología NASA GISS.</p>
+        </article>
+        <article class="tarjeta">
+          <h3>Exploración e inventario</h3>
+          <p>Se exploraron nombres y tipos de variables, cobertura temporal y regional, valores nulos y cantidad de observaciones. El inventario registra 195 filas, tres regiones y 65 años (1961–2025).</p>
+        </article>
+        <article class="tarjeta">
+          <h3>Análisis y visualización</h3>
+          <p>Con Python se prepararon resúmenes descriptivos y gráficos interactivos con Altair. Los gráficos se guardan como HTML autocontenido en <code>docs/graficos/</code>.</p>
+        </article>
+      </div>
+      <p class="nota">La variable analizada es la variación de la temperatura media, expresada en grados Celsius (°C).</p>
+    </section>
+
+    <section id="evolucion">
+      <h2>Evolución de la variación de temperatura</h2>
+      <p>Las tres series muestran fluctuaciones entre años, junto con valores generalmente más altos en las décadas recientes que al inicio del registro. En 2024, cada región alcanza su valor más alto de la serie observada; en 2025 los valores disminuyen respecto del año anterior, aunque permanecen positivos.</p>
+      <iframe class="grafico grafico-tiempo" src="docs/graficos/cambio_tiempo.html" title="Gráfico de la variación anual de temperatura por región, de 1961 a 2025"></iframe>
+      <p class="nota">Fuente indicada en el gráfico: FAOSTAT y NASA GISS. Tamaño de muestra: n = 195.</p>
+    </section>
+
+    <section id="ranking">
+      <h2>Ranking de variación promedio por región</h2>
+      <p>El Caribe presenta la mayor variación promedio de temperatura (0,539 °C), seguido de América del Sur (0,532 °C) y América Central (0,470 °C). Cada promedio se basa en 65 observaciones anuales.</p>
+      <iframe class="grafico grafico-ranking" src="docs/graficos/ranking.html" title="Gráfico de ranking de la variación promedio de temperatura por región"></iframe>
+      <p class="nota">Fuente indicada en el gráfico: FAOSTAT y NASA GISS. Tamaño de muestra: n = 195.</p>
+    </section>
+
+    <section id="limitaciones">
+      <h2>Limitaciones</h2>
+      <ul>
+        <li>El análisis es descriptivo y resume los valores observados.</li>
+        <li>No permite establecer causalidad.</li>
+        <li>Los datos están agregados a nivel regional.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer id="creditos">
+    <h2>Créditos</h2>
+    <p>CEPALSTAT · FAOSTAT · FAO · NASA GISS · GitHub Codespaces · GitHub Copilot</p>
+    <p class="nota">El código utilizado en este proyecto fue desarrollado con apoyo de un agente de inteligencia artificial.</p>
+  </footer>
+</body>
+</html>
