@@ -6,7 +6,7 @@ import pandas as pd
 
 RAIZ_PROYECTO = Path(__file__).resolve().parents[1]
 RUTA_EXCEL = RAIZ_PROYECTO / "datos" / "crudo" / "data_1787673487.xlsx"
-RUTA_GRAFICO = RAIZ_PROYECTO / "docs" / "graficos" / "cambio_tiempo.html"
+RUTA_GRAFICO = RAIZ_PROYECTO / "docs" / "graficos" / "cambio_tiempo.vl.json"
 HOJA = "datos"
 COLUMNAS = ["Años__ESTANDAR", "value", "País__ESTANDAR"]
 TITULO = (
@@ -84,6 +84,7 @@ def crear_html(datos):
     return html_grafico.replace("</body>", f"{contenido}</body>")
 
 
+
 def main():
     datos = pd.read_excel(
         RUTA_EXCEL,
@@ -97,15 +98,21 @@ def main():
             "Las columnas requeridas contienen valores nulos; no se eliminarán "
             "ni imputarán registros."
         )
-    if datos.duplicated(subset=["Años__ESTANDAR", "País__ESTANDAR"]).any():
+
+    if datos.duplicated(
+        subset=["Años__ESTANDAR", "País__ESTANDAR"]
+    ).any():
         raise ValueError(
             "Hay más de un registro para una combinación de año y región; "
             "no se agregarán observaciones."
         )
 
     RUTA_GRAFICO.parent.mkdir(parents=True, exist_ok=True)
-    RUTA_GRAFICO.write_text(crear_html(datos), encoding="utf-8")
-    print(f"Gráfico guardado en {RUTA_GRAFICO}")
+
+    grafico = crear_grafico(datos)
+    grafico.save(str(RUTA_GRAFICO))
+
+    print(f"Gráfico Vega-Lite guardado en {RUTA_GRAFICO}")
 
 
 if __name__ == "__main__":

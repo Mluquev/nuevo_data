@@ -6,7 +6,7 @@ import pandas as pd
 
 RAIZ_PROYECTO = Path(__file__).resolve().parents[1]
 RUTA_EXCEL = RAIZ_PROYECTO / "datos" / "crudo" / "data_1787673487.xlsx"
-RUTA_GRAFICO = RAIZ_PROYECTO / "docs" / "graficos" / "ranking.html"
+RUTA_GRAFICO = RAIZ_PROYECTO / "docs" / "graficos" / "ranking.vl.json"
 HOJA = "datos"
 COLUMNAS = ["País__ESTANDAR", "value"]
 TITULO = (
@@ -117,21 +117,23 @@ def crear_html(resumen, cantidad):
     return html_grafico.replace("</body>", f"{contenido}</body>")
 
 
+
 def main():
     datos = pd.read_excel(
         RUTA_EXCEL,
         sheet_name=HOJA,
         usecols=COLUMNAS,
     )
+
     resumen = calcular_resumen(datos)
     cantidad = int(datos["value"].count())
 
     RUTA_GRAFICO.parent.mkdir(parents=True, exist_ok=True)
-    RUTA_GRAFICO.write_text(
-        crear_html(resumen, cantidad),
-        encoding="utf-8",
-    )
-    print(f"Gráfico guardado en {RUTA_GRAFICO}")
+
+    grafico = crear_grafico(resumen, cantidad)
+    grafico.save(str(RUTA_GRAFICO))
+
+    print(f"Gráfico Vega-Lite guardado en {RUTA_GRAFICO}")
 
 
 if __name__ == "__main__":
