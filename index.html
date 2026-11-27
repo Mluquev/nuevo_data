@@ -63,12 +63,30 @@
     }
 
     .grafico {
-      display: block;
-      width: 100%;
-      border: 0;
-      border-radius: 0.5rem;
-      background: #fff;
-    }
+  width: 100%;
+  border: 1px solid #d5e0e6;
+  border-radius: 0.5rem;
+  background: #fff;
+  overflow: hidden;
+  padding: 1rem;
+}
+
+.grafico-tiempo {
+  min-height: 500px;
+}
+
+.grafico-ranking {
+  min-height: 350px;
+}
+
+.grafico .vega-embed {
+  width: 100%;
+}
+
+.grafico .vega-embed svg,
+.grafico .vega-embed canvas {
+  max-width: 100%;
+}
 
     .grafico-tiempo { height: 680px; }
     .grafico-ranking { height: 460px; }
@@ -86,6 +104,9 @@
       .grafico-ranking { height: 420px; }
     }
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
 </head>
 <body>
   <header>
@@ -124,14 +145,24 @@
     <section id="evolucion">
       <h2>Evolución de la variación de temperatura</h2>
       <p>Las tres series muestran fluctuaciones entre años, junto con valores generalmente más altos en las décadas recientes que al inicio del registro. En 2024, cada región alcanza su valor más alto de la serie observada; en 2025 los valores disminuyen respecto del año anterior, aunque permanecen positivos.</p>
-      <iframe class="grafico grafico-tiempo" src="docs/graficos/cambio_tiempo.html" title="Gráfico de la variación anual de temperatura por región, de 1961 a 2025"></iframe>
+      <div
+  id="grafico-tiempo"
+  class="grafico grafico-tiempo"
+  role="img"
+  aria-label="Gráfico de evolución de la variación anual de temperatura por región">
+</div>
       <p class="nota">Fuente indicada en el gráfico: FAOSTAT y NASA GISS. Tamaño de muestra: n = 195.</p>
     </section>
 
     <section id="ranking">
       <h2>Ranking de variación promedio por región</h2>
       <p>El Caribe presenta la mayor variación promedio de temperatura (0,539 °C), seguido de América del Sur (0,532 °C) y América Central (0,470 °C). Cada promedio se basa en 65 observaciones anuales.</p>
-      <iframe class="grafico grafico-ranking" src="docs/graficos/ranking.html" title="Gráfico de ranking de la variación promedio de temperatura por región"></iframe>
+      <div
+  id="grafico-ranking"
+  class="grafico grafico-ranking"
+  role="img"
+  aria-label="Gráfico del ranking de variación promedio de temperatura por región">
+</div>
       <p class="nota">Fuente indicada en el gráfico: FAOSTAT y NASA GISS. Tamaño de muestra: n = 195.</p>
     </section>
 
@@ -150,5 +181,38 @@
     <p>CEPALSTAT · FAOSTAT · FAO · NASA GISS · GitHub Codespaces · GitHub Copilot</p>
     <p class="nota">El código utilizado en este proyecto fue desarrollado con apoyo de un agente de inteligencia artificial.</p>
   </footer>
+  <script>
+  async function cargarGrafico(id, archivo) {
+    const contenedor = document.getElementById(id);
+
+    try {
+      await vegaEmbed(contenedor, archivo, {
+        actions: false,
+        renderer: "canvas"
+      });
+    } catch (error) {
+      console.error(`Error al cargar ${id}:`, error);
+
+      contenedor.innerHTML = `
+        <p style="color: #b42318;">
+          No se pudo cargar esta gráfica.
+          Comprueba que el archivo de datos visuales existe.
+        </p>
+      `;
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    cargarGrafico(
+      "grafico-tiempo",
+      "docs/graficos/cambio_tiempo.vl.json"
+    );
+
+    cargarGrafico(
+      "grafico-ranking",
+      "docs/graficos/ranking.vl.json"
+    );
+  });
+</script>
 </body>
 </html>
