@@ -1,6 +1,6 @@
 # Variación de la temperatura media en América Latina y el Caribe (1961–2025)
 
-Análisis descriptivo de 195 observaciones anuales para El Caribe, América Central y América del Sur, a partir de datos de FAOSTAT basados en la metodología NASA GISS.
+Análisis descriptivo de 195 observaciones anuales para El Caribe, América Central y América del Sur, a partir de datos de FAOSTAT y CEPALSTAT basados en la metodología NASA GISS.
 
 La página de presentación con los gráficos incrustados está disponible en [`index.html`](index.html). Para probarla localmente, inicia un servidor HTTP en la raíz del proyecto y abre `http://localhost:8000/`.
 
